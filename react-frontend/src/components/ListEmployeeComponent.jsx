@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import EmployeeService from '../services/EmployeeService'
 
-const ListEmployeeComponent = () => {
+const ListEmployeeComponent = (props) => {
 
     const [employees, setEmployees] = useState([])
 
@@ -15,9 +15,19 @@ const ListEmployeeComponent = () => {
             })
     }, [])
 
+    const addEmployee = () => {
+        console.log(props.history)
+        props.history.push('/add-employee')
+    }
+
     return (
         <div>
             <h2 className="text-center">Employees List</h2>
+            <div>
+                <button className="btn btn-primary" onClick={addEmployee}>
+                    Add Employee
+                </button>
+            </div>
             <div className="row">
                 <table className="table table-striped table-bordered">
                     <thead>
