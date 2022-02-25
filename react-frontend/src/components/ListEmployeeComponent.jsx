@@ -72,5 +72,3 @@ const ListEmployeeComponent = (props) => {
 }
 
 export default ListEmployeeComponent
-
-// {/* <a href={`/view-employee/${emp.id}`}> */}{/* </a> */}

@@ -8,7 +8,6 @@ const EmployeeDetailsComponent = (props) => {
     useEffect(() => {
         if (props.match.params) {
             EmployeeService.getEmployeeById(props.match.params.id).then((res) => {
-                console.log('get employee', res.data)
                 setEmployeeData(res.data)
             })
         }

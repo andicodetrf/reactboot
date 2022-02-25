@@ -26,11 +26,8 @@ const EmployeeFormComponent = (props) => {
             emailId
         }
 
-
         employeeData = props.match.params ? { ...employeeData, ...props.match.params } : employeeData
-        console.log(employeeData)
-        const res = await props.apiHandler(employeeData)
-        console.log(res.data)
+        await props.apiHandler(employeeData)
         props.history.push('/employees')
     }
 
