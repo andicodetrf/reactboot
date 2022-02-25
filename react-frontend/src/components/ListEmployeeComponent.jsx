@@ -16,8 +16,19 @@ const ListEmployeeComponent = (props) => {
     }, [])
 
     const addEmployee = () => {
-        console.log(props.history)
         props.history.push('/add-employee')
+    }
+
+    const editEmployee = (id) => {
+        props.history.push(`/update-employee/${id}`)
+    }
+
+    const deleteEmployee = async (id) => {
+        const { data } = await EmployeeService.deleteEmployee(id)
+        if (data?.deleted) {
+            const updatedList = employees.filter((emp) => emp.id !== id)
+            setEmployees(updatedList)
+        }
     }
 
     return (
@@ -44,6 +55,12 @@ const ListEmployeeComponent = (props) => {
                                 <td>{emp.firstName}</td>
                                 <td>{emp.lastName}</td>
                                 <td>{emp.emailId}</td>
+
+                                <td>
+                                    <button className="btn btn-info" onClick={() => editEmployee(emp.id)}>Update</button>
+                                    <button className="btn btn-danger" onClick={() => deleteEmployee(emp.id)}>Delete</button>
+                                    <button className="btn btn-warning" onClick={() => props.history.push(`/view-employee/${emp.id}`)}>View</button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -55,3 +72,5 @@ const ListEmployeeComponent = (props) => {
 }
 
 export default ListEmployeeComponent
+
+// {/* <a href={`/view-employee/${emp.id}`}> */}{/* </a> */}

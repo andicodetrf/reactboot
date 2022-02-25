@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import EmployeeService from '../services/EmployeeService'
+import { useEffect } from 'react'
 
-const CreateEmployeeComponent = (props) => {
+const EmployeeFormComponent = (props) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [emailId, setEmailId] = useState('')
@@ -18,37 +18,32 @@ const CreateEmployeeComponent = (props) => {
         setEmailId(e.target.value)
     }
 
-    // const clearInputHandler = () => {
-    //     setFirstName('')
-    //     setLastName('')
-    //     setEmailId('')
-    // }
-
     const saveEmployeeHandler = async (e) => {
         e.preventDefault()
-        const employeeData = {
+        let employeeData = {
             firstName,
             lastName,
             emailId
         }
-        const res = await EmployeeService.createEmployee(employeeData)
+
+
+        employeeData = props.match.params ? { ...employeeData, ...props.match.params } : employeeData
+        console.log(employeeData)
+        const res = await props.apiHandler(employeeData)
         console.log(res.data)
         props.history.push('/employees')
-        // clearInputHandler()
     }
 
     const cancelHandler = () => {
         props.history.push('/employees')
     }
 
-
-
     return (
         <div>
             <div className="container">
                 <div className="row">
                     <div className="card col-md-6 offset-md-3 offset-md-3">
-                        <h3 className="text-center">Add Employee</h3>
+                        <h3 className="text-center">{props.header}</h3>
                         <div className="card-body">
                             <form action="">
                                 <div className="form-group">
@@ -75,4 +70,4 @@ const CreateEmployeeComponent = (props) => {
     )
 }
 
-export default CreateEmployeeComponent
+export default EmployeeFormComponent
