@@ -1,24 +1,24 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useState, ChangeEvent, FormEvent } from 'react'
+import { FormAndRouteProps } from '../types'
 
-const EmployeeFormComponent = (props) => {
+const EmployeeFormComponent = (props: FormAndRouteProps) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [emailId, setEmailId] = useState('')
 
-    const firstNameHandler = (e) => {
+    const firstNameHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setFirstName(e.target.value)
     }
 
-    const lastNameHandler = (e) => {
+    const lastNameHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setLastName(e.target.value)
     }
 
-    const emailIdHandler = (e) => {
+    const emailIdHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setEmailId(e.target.value)
     }
 
-    const saveEmployeeHandler = async (e) => {
+    const saveEmployeeHandler = async (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
         let employeeData = {
             firstName,

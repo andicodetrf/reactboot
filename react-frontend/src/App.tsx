@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, RouteComponentProps, Switch } from "react-router-dom";
 import EmployeeDetailsComponent from "./components/EmployeeDetailsComponent";
 import EmployeeFormComponent from "./components/EmployeeFormComponent";
 import FooterComponent from "./components/FooterComponent";
@@ -16,7 +16,7 @@ function App() {
 					<Route path="/employees" component={ListEmployeeComponent} />
 					<Route
 						path="/add-employee"
-						component={(props) => (
+						component={(props: RouteComponentProps) => (
 							<EmployeeFormComponent
 								header={"Add Employee"}
 								apiHandler={EmployeeService.createEmployee}
@@ -30,7 +30,7 @@ function App() {
 					/>
 					<Route
 						path="/update-employee/:id"
-						component={(props) => (
+						component={(props: RouteComponentProps) => (
 							<>
 								<EmployeeDetailsComponent {...props} />
 								<EmployeeFormComponent

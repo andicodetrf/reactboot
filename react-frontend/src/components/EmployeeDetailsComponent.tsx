@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import EmployeeService from '../services/EmployeeService'
+import { RouteProps, IEmployee } from '../types'
 
-const EmployeeDetailsComponent = (props) => {
+const EmployeeDetailsComponent = (props: RouteProps) => {
 
-    const [employeeData, setEmployeeData] = useState({})
+    const [employeeData, setEmployeeData] = useState<IEmployee>({} as IEmployee)
 
     useEffect(() => {
         if (props.match.params) {

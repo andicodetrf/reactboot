@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { RouteComponentProps } from 'react-router-dom'
 import EmployeeService from '../services/EmployeeService'
+import { IdTypes, IEmployee } from '../types'
 
-const ListEmployeeComponent = (props) => {
 
-    const [employees, setEmployees] = useState([])
+const ListEmployeeComponent = (props: RouteComponentProps) => {
+
+    const [employees, setEmployees] = useState<IEmployee[]>([])
 
     useEffect(() => {
         EmployeeService.getEmployees()
@@ -19,14 +22,14 @@ const ListEmployeeComponent = (props) => {
         props.history.push('/add-employee')
     }
 
-    const editEmployee = (id) => {
+    const editEmployee = (id: IdTypes) => {
         props.history.push(`/update-employee/${id}`)
     }
 
-    const deleteEmployee = async (id) => {
+    const deleteEmployee = async (id: IdTypes) => {
         const { data } = await EmployeeService.deleteEmployee(id)
         if (data?.deleted) {
-            const updatedList = employees.filter((emp) => emp.id !== id)
+            const updatedList = employees.filter((emp: IEmployee) => emp.id !== id)
             setEmployees(updatedList)
         }
     }
@@ -50,7 +53,7 @@ const ListEmployeeComponent = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {employees.map((emp) => (
+                        {employees.map((emp: IEmployee) => (
                             <tr key={emp.id}>
                                 <td>{emp.firstName}</td>
                                 <td>{emp.lastName}</td>
